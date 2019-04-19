@@ -1,15 +1,52 @@
-# 第一个Vue练习-Counter组件
-## 要求
-1. 通过Vue-Cli 的`vue create counter`, 创建Vue开发栈
-2. 在此栈中实现Counter组件：
+# Vuex Todo List - v2
+## 重构:
+>将目前所有数据存储都改为来自**state**的方式，所有的数据获取来源和修改来源都来自服务器端的API Call，当数据从API获取或者修改以后，再去调整**state**让UI render
 
->  两个按钮 “+” 和 “-”
->> 
-> 一个文字显示区域 span，初始值为0
->>
->  当点击“+”后 显示区域显示1，如继续点击，按此规矩累加
->>
-> 当点击“-”后 显示区域显示数字需要减1，如继续点击，按此规矩累减
+**例如以下获取状态的todo list的API:**
+
+```
+http://5b4dcb2aec112500143a2311.mockapi.io/api/todos?search=active
+```
+**构建自己的Mcok API Server:**
+
+## https://www.mockapi.io/projects
+**课参考文档**：https://www.mockapi.io/docs
+
+**访问HTTP API使用 npm库：** axios, 具体使用方法参考axios github文档
+### 代码重构思路提示
+
+todosAPI封装了对API的异步调用，仅仅在成功后通过回调通知，再回调中再调用dispath，例如：
+```  
+apiUrl: 'http://5b4dcb2aec112500143a2311.mockapi.io/api';
+  add(todo, successCallBack) {
+    // this.todos.push(todo, successCallBack);
+    axios
+      .post(`${this.apiUrl}/todos`, {
+        id: todo.viewId,
+        content: todo.content,
+        status: todo.status
+      })
+      .then(function(response) {
+        console.log(response.data);
+        successCallBack(
+          new Todo(
+            response.data.id,
+            response.data.content,
+            response.data.status
+          )
+        );
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
+```
+### 要求
+* Git commit 小步提交
+* 每次提交的评论都有意义
+
+
+
 ## 编程题答题流程
 
 - 在命令行中使用以下命令在用户本地任意目录下clone此题目库
