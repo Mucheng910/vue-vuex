@@ -1,7 +1,6 @@
-## 需求：
-在**Vue 练习-2-Multi Counter**的基础上使用**Vuex**进行状态管理
-
-**上传代码到自己的代码库，将地址提交到这里**
+- 学习vue router和ant design vue
+- 将之前的todoList改造成使用router来控制all、active、competed显示，并使用ant design重做界面
+- 作业提交github仓库，将地址提交到这里
 
 ### 要求
 * Git commit 小步提交
